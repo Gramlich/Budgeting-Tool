@@ -1,0 +1,7 @@
+import csv
+
+t = open('dailyFunds.csv')
+csv_t = csv.reader(t)
+result = [row[2:] for row in csv_t]
+money_left = sum([int(item) for sublist in result for item in sublist])
+print(money_left)
