@@ -1,0 +1,31 @@
+import csv
+import time
+
+df = {}
+
+todaysDate = time.strftime("%m/%d/%y")
+
+
+while True:
+    expenseType = input('Choose your known monthly expense: \n\n'
+                        '1. Rent & Bills \n'
+                        '2. Healthcare \n'
+                        '\n \n '
+                        'Press any other key to go back to Home. '
+                        '')
+    expenseCost = None
+
+    if expenseType == '1':
+        expenseCost = int(input('How much will your rent and bills be this month? '))
+        df['Rent & Bills'] = (expenseCost - (2 * expenseCost))
+    elif expenseType == '2':
+        expenseCost = int(input('How much does your healthcare cost? '))
+        df['Healthcare'] = (expenseCost - (2 * expenseCost))
+    elif expenseType not in ['1','2']:
+        commaSep = []
+        [commaSep.extend([[todaysDate, k, v]]) for k, v in df.items()]
+        with open('dailyFunds.csv', 'a') as resultFile:
+            wr = csv.writer(resultFile)
+            wr.writerows(commaSep)
+            resultFile.close()
+            break
