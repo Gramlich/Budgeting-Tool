@@ -1,0 +1,43 @@
+import csv
+import time
+
+df = {}
+
+todaysDate = time.strftime("%m/%d/%y")
+
+
+while True:
+    expenseType = input('What did you spend your money on today?\n\n'
+                        '1. Food \n'
+                        '2. Personal Care \n'
+                        '3. Household Items \n'
+                        '4. Social Obligations \n'
+                        '5. Frivolous Items \n'
+                        '\n \n '
+                        'Press any other key to go back to Home. '
+                        '')
+    expenseCost = None
+
+    if expenseType == '1':
+        expenseCost = int(input('How much did you spend on Food? '))
+        df['Food'] = (expenseCost - (2 * expenseCost))
+    elif expenseType == '2':
+        expenseCost = int(input('How much did you spend on Personal Care? '))
+        df['Personal Care'] = (expenseCost - (2 * expenseCost))
+    elif expenseType == '3':
+        expenseCost = int(input('How much did you spend on Household Items? '))
+        df['Household Items'] = (expenseCost - (2 * expenseCost))
+    elif expenseType == '4':
+        expenseCost = int(input('How much did you spend on Social Obligations? '))
+        df['Social Obligations'] = (expenseCost - (2 * expenseCost))
+    elif expenseType == '5':
+        expenseCost = int(input('How much did you spend on Frivolous Items? '))
+        df['Frivolous Items'] = (expenseCost - (2 * expenseCost))
+    elif expenseType not in ['1','2','3','4','5']:
+        commaSep = []
+        [commaSep.extend([[todaysDate, k, v]]) for k, v in df.items()]
+        with open('dailyFunds.csv', 'a') as resultFile:
+            wr = csv.writer(resultFile)
+            wr.writerows(commaSep)
+            resultFile.close()
+            break
