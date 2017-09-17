@@ -1,0 +1,21 @@
+from Results import money_left
+
+while True:
+    path = input('What would you like to do? \n'
+                 '1. Input Income \n'
+                 '2. Input Daily Expenses \n'
+                 '3. Input Monthly Expenses \n'
+                 '\n \n'
+                 'Press any other key to see Results. ')
+
+    if path == '1':
+        import inputIncome
+    elif path == '2':
+        import dailyExpenses
+    elif path == '3':
+        import monthlyExpenses
+    else:
+        print('You have ')
+        from Results import money_left
+        break
+
