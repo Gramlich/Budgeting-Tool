@@ -1,0 +1,35 @@
+import csv
+import time
+
+df = {}
+
+todaysDate = time.strftime("%m/%d/%y")
+
+
+while True:
+    incomeType = input('Choose source of income: \n\n'
+                        '1. Salary \n'
+                        '2. Bonus \n'
+                        '3. Additional Income \n'
+                        '\n \n '
+                        'Press any other key to go back to Home. '
+                        '')
+    incomeAmount = None
+
+    if incomeType == '1':
+        incomeAmount = int(input('What is your expected salary this month? '))
+        df['Salary'] = incomeAmount
+    elif incomeType == '2':
+        incomeAmount = int(input('How much was your bonus? '))
+        df['Bonus'] = incomeAmount
+    elif incomeType == '3':
+        incomeAmount = int(input('How much additional income? '))
+        df['Additional Income'] = incomeAmount
+    elif incomeType not in ['1','2','3']:
+        commaSep = []
+        [commaSep.extend([[todaysDate, k, v]]) for k, v in df.items()]
+        with open('dailyFunds.csv', 'a') as resultFile:
+            wr = csv.writer(resultFile)
+            wr.writerows(commaSep)
+            resultFile.close()
+            break
